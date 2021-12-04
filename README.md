@@ -21,7 +21,7 @@ The purpose of this analysis was to determine the number of retiring employees p
 ## Summary
 
 A total of 90,398 employees are about to retire and their roles need to filled.
-There are plenty of retirement ready employees to mentor the next generation, however we seem to have too little eligible mentors to take their positions as shown below.
+There are plenty of retirement ready employees to mentor the next generation, however we eem to have too little eligible mentors to take their positions as shown below.
 
 
 ![image](https://user-images.githubusercontent.com/92830382/144723754-4b0bac4c-45ea-4a54-954f-5376f1cace1c.png)
