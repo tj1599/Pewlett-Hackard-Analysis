@@ -1,3 +1,4 @@
+--Deliverable 1
 SELECT e.emp_no,
 	   e.first_name,
 	   e.last_name,
@@ -16,18 +17,19 @@ SELECT DISTINCT ON (emp_no) emp_no,
 first_name,
 last_name,
 title
-INTO unique_titles
+-- INTO unique_titles
 FROM retirement_table
 ORDER BY emp_no ASC, to_date DESC;
 
 -- Create Retirement titles table 
 SELECT COUNT(ui.first_name), ui.title
-INTO retiring_titles
+-- INTO retiring_titles
 FROM unique_titles as ui
 GROUP BY ui.title
 ORDER BY ui.count DESC;
 
--- Creating a list of employees eligible for potential mentorship program
+
+-- Deliverable 2: Creating a list of employees eligible for potential mentorship program
 SELECT DISTINCT ON (e.emp_no) e.emp_no,
 	   e.first_name,
 	   e.last_name,
@@ -35,7 +37,7 @@ SELECT DISTINCT ON (e.emp_no) e.emp_no,
 	   de.from_date,
 	   de.to_date,
 	   ti.title
-INTO mentorship_eligibility
+-- INTO mentorship_eligibility
 FROM employees as e
 INNER JOIN dept_emp as de
 	ON (e.emp_no = de.emp_no)
@@ -44,3 +46,34 @@ INNER JOIN titles as ti
 WHERE de.to_date = '9999-01-01'
      AND e.birth_date BETWEEN '1965-01-01' AND '1965-12-31'
 ORDER BY emp_no;
+
+
+-- Deliverable 3
+-- Eligible Mentors by title
+SELECT COUNT(me.first_name), me.title
+FROM mentorship_eligibility as me
+GROUP BY me.title
+ORDER BY me.count DESC;
+
+-- Increasing eligible mentors to 3 years
+SELECT DISTINCT ON (e.emp_no) e.emp_no,
+	   e.first_name,
+	   e.last_name,
+	   e.birth_date,
+	   de.from_date,
+	   de.to_date,
+	   ti.title
+INTO mentorship_eligibility_2
+FROM employees as e
+INNER JOIN dept_emp as de
+	ON (e.emp_no = de.emp_no)
+INNER JOIN titles as ti
+	ON (e.emp_no = ti.emp_no)
+WHERE de.to_date = '9999-01-01'
+     AND e.birth_date BETWEEN '1962-01-01' AND '1965-12-31'
+ORDER BY emp_no;
+
+SELECT COUNT(me.first_name), me.title
+FROM mentorship_eligibility_2 as me
+GROUP BY me.title
+ORDER BY me.count DESC;
